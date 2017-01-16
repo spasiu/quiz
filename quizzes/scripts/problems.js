@@ -79,15 +79,21 @@
       });
   }
 
-  function createUser(userId, givenName, surname) {
+  function rand() {
+    return Math.floor(Math.random() * 10);
+  }
+
+  function createUser(name) {
+    const splitName = name.split(' ');
+    const userId = `${splitName[0].toLowerCase()}${rand()}${rand()}${rand()}${rand()}`
     Smooch.init({
       appToken: window.appToken,
       userId,
-      givenName,
-      surname
+      givenName: splitName[0],
+      surname: splitName[1]
     })
-      .then((wat) => {
-        console.log(wat, Smooch);
+      .then((user) => {
+        console.log(user.userId);
         Smooch.destroy();
       });
   }
