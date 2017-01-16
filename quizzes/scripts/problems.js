@@ -6,7 +6,16 @@
   }
 
   function init(quiz, token) {
+    const args = window.location.search
+      .replace('?', '')
+      .split('&')
+      .map(query => query.split('='))
+      .reduce((args, query) => {
+        args[query[0]] = query[1];
+        return args;
+      }, {});
     const userInput = document.createElement('input');
+    userInput.value = args.userId || '';
     userInput.setAttribute('type', 'text');
     userInput.setAttribute('placeholder', 'user ID');
     userInput.setAttribute('id', 'user-id');
